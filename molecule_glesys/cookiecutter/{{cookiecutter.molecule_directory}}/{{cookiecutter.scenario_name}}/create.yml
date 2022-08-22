@@ -1,0 +1,62 @@
+---
+{% raw -%}
+- name: Create
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  no_log: "{{ molecule_no_log }}"
+  vars:
+    keypair_path: "{{ lookup('env','MOLECULE_EPHEMERAL_DIRECTORY') }}/ssh_key"
+  tasks:
+    - name: Create keypair
+      user:
+        name: "{{ lookup('env','USER') }}"
+        generate_ssh_key: true
+        ssh_key_file: "{{ keypair_path }}"
+      register: keypair_result
+
+    - name: Create or update server at glesys, returns list of servers in project
+      glesys.cloud.glesys_server:
+        hostname: "{{ item.name }}"
+        state: present
+        project: "{{ lookup('ansible.builtin.env', 'GLESYS_PROJECT') }}"
+        apikey: "{{ lookup('ansible.builtin.env', 'GLESYS_APIKEY') }}"
+        cpus: "{{ item.cpus }}"
+        memory: "{{ item.memory }}"
+        bandwidth: 1000
+        description: "{{ item.description }}"
+        disk: "{{ item.disk }}"
+        users:
+          - username: "{{ molecule_yml.driver.vm_username }}"
+            sshkeys:
+              - "{{ keypair_result.ssh_public_key }}"
+        datacenter: "{{ item.datacenter }}"
+        template: "{{ item.template }}"
+        platform: "{{ item.platform }}"
+        wait: true
+        wait_timeout: 600
+      no_log: true
+      async: 7200
+      poll: 0
+      register: async_results
+      loop: "{{ molecule_yml.platforms }}"
+
+    - name: Check the test instance creation status
+      async_status:
+        jid: "{{ item.ansible_job_id }}"
+      loop: "{{ async_results.results }}"
+      register: server
+      until: server.finished
+      delay: 10
+      retries: 300
+      notify:
+        - "Populate instance config dict for linux"
+        - "Convert instance config dict to a list"
+        - "Dump instance config"
+        - "Wait for SSH"
+
+  handlers:
+    - name: Import main handler tasks
+      import_tasks: handlers/main.yml
+
+{%- endraw %}

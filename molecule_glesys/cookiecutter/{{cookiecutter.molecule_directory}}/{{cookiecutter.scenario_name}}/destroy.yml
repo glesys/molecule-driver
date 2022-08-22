@@ -1,0 +1,31 @@
+---
+{% raw -%}
+- name: Destroy
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  no_log: "{{ molecule_no_log }}"
+  tasks:
+    - name: Destroy server instances
+      glesys.cloud.glesys_server:
+        hostname: "{{ item.name }}"
+        state: absent
+        project: "{{ lookup('ansible.builtin.env', 'GLESYS_PROJECT') }}"
+        apikey: "{{ lookup('ansible.builtin.env', 'GLESYS_APIKEY') }}"
+        wait: true
+        wait_timeout: 600
+      no_log: true
+      async: 7200
+      poll: 0
+      register: async_results
+      loop: "{{ molecule_yml.platforms }}"
+
+    - name: Wait for server destruction
+      async_status:
+        jid: "{{ item.ansible_job_id }}"
+      loop: "{{ async_results.results }}"
+      register: server
+      until: server.finished
+      delay: 1
+      retries: 300
+{%- endraw %}

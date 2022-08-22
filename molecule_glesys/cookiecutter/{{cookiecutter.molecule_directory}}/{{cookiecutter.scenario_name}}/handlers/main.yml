@@ -1,0 +1,42 @@
+---
+{% raw -%}
+- name: Debug server async
+  debug:
+    msg: "{{ instance_info }}"
+  loop: "{{ server.results }}"
+  loop_control:
+    loop_var: instance_info
+
+- name: Populate instance config dict for linux
+  set_fact:
+    instance_conf_dict: {
+      'instance': "{{ instance_info.item.item.name }}",
+      'address': "{{ instance_info.server.ipaddress }}",
+      'user': "{{ molecule_yml.driver.vm_username }}",
+      'port': 22,
+      'identity_file': "{{ keypair_path }}"
+    }
+  loop: "{{ server.results }}"
+  loop_control:
+    loop_var: instance_info
+  register: instance_config_dict
+
+- name: Convert instance config dict to a list
+  set_fact:
+    instance_conf: "{{ instance_config_dict.results | map(attribute='ansible_facts.instance_conf_dict') | list }}"
+
+- name: Dump instance config
+  copy:
+    content: "{{ instance_conf | to_json | from_json | to_yaml }}"
+    dest: "{{ molecule_instance_config }}"
+    mode: 0644
+
+- name: Wait for SSH
+  wait_for:
+    port: "{{ item.port }}"
+    host: "{{ item.address }}"
+    search_regex: SSH
+    delay: 1
+    timeout: 320
+  with_items: "{{ lookup('file', molecule_instance_config) | from_yaml }}"
+{%- endraw %}

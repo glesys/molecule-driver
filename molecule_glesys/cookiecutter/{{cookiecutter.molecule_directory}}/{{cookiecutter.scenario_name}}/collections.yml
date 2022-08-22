@@ -1,0 +1,4 @@
+collections:
+  - name: git@gitlab.glesys.io:magnus/ansible-glesys.git
+    type: git
+    version: main

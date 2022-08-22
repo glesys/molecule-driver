@@ -1,0 +1,50 @@
+---
+dependency:
+  name: {{ cookiecutter.dependency_name }}
+  options:
+    requirements-file: {{ cookiecutter.molecule_directory }}/{{ cookiecutter.scenario_name }}/collections.yml
+driver:
+  name: {{ cookiecutter.driver_name }}
+  vm_username: molecule
+
+platforms:
+  - name: "{{ cookiecutter.role_name }}-ubuntu-20-04"
+    template: Ubuntu 20.04 LTS (Focal Fossa)
+    description: "ubuntu-20-04"
+    datacenter: "Falkenberg"
+    platform: KVM
+    cpus: 2
+    memory: 2048
+    disk: 20
+
+  - name: "{{ cookiecutter.role_name }}-ubuntu-18-04"
+    template: Ubuntu 18.04 LTS (Bionic Beaver)
+    description: "ubuntu-18-04"
+    datacenter: "Falkenberg"
+    platform: KVM
+    cpus: 2
+    memory: 2048
+    disk: 20
+
+  - name: "{{ cookiecutter.role_name }}-debian-10"
+    template: Debian 10 (Buster)
+    description: "debian-10"
+    datacenter: "Falkenberg"
+    platform: KVM
+    cpus: 2
+    memory: 2048
+    disk: 20
+
+  - name: "{{ cookiecutter.role_name }}-debian-11"
+    template: Debian 11 (Bullseye)
+    description: "debian-11"
+    datacenter: "Falkenberg"
+    platform: KVM
+    cpus: 2
+    memory: 2048
+    disk: 20
+
+provisioner:
+  name: {{ cookiecutter.provisioner_name }}
+verifier:
+  name: {{ cookiecutter.verifier_name }}
