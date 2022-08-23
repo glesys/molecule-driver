@@ -23,7 +23,6 @@
         apikey: "{{ lookup('ansible.builtin.env', 'GLESYS_APIKEY') }}"
         cpus: "{{ item.cpus }}"
         memory: "{{ item.memory }}"
-        bandwidth: 1000
         description: "{{ item.description }}"
         disk: "{{ item.disk }}"
         users:
