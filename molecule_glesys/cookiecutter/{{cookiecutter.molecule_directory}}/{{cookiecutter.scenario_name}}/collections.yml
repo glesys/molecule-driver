@@ -1,4 +1,3 @@
 collections:
-  - name: git@gitlab.glesys.io:magnus/ansible-glesys.git
-    type: git
-    version: main
+  - name: glesys.cloud
+    version: 0.0.1
