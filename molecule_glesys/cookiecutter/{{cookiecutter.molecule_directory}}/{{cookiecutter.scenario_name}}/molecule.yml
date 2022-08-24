@@ -8,6 +8,15 @@ driver:
   vm_username: molecule
 
 platforms:
+  - name: "{{ cookiecutter.role_name }}-ubuntu-22-04"
+    template: Ubuntu 22.04 LTS (Jammy Jellyfish)
+    description: "ubuntu-22-04"
+    datacenter: "Falkenberg"
+    platform: KVM
+    cpus: 2
+    memory: 2048
+    disk: 20
+
   - name: "{{ cookiecutter.role_name }}-ubuntu-20-04"
     template: Ubuntu 20.04 LTS (Focal Fossa)
     description: "ubuntu-20-04"
