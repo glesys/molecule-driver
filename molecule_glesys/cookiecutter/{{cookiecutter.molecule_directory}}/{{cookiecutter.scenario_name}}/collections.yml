@@ -1,3 +1,4 @@
 collections:
   - name: glesys.cloud
     version: 0.0.2
+  - name: community.crypto

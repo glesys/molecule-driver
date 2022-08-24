@@ -9,10 +9,8 @@
     keypair_path: "{{ lookup('env','MOLECULE_EPHEMERAL_DIRECTORY') }}/ssh_key"
   tasks:
     - name: Create keypair
-      user:
-        name: "{{ lookup('env','USER') }}"
-        generate_ssh_key: true
-        ssh_key_file: "{{ keypair_path }}"
+      community.crypto.openssh_keypair:
+        path: "{{ keypair_path }}"
       register: keypair_result
 
     - name: Create or update server at glesys, returns list of servers in project
@@ -28,7 +26,7 @@
         users:
           - username: "{{ molecule_yml.driver.vm_username }}"
             sshkeys:
-              - "{{ keypair_result.ssh_public_key }}"
+              - "{{ keypair_result.public_key }}"
         datacenter: "{{ item.datacenter }}"
         template: "{{ item.template }}"
         platform: "{{ item.platform }}"
