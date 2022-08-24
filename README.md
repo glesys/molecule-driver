@@ -4,8 +4,9 @@ Molecule driver to spin up and run tests in GleSYS Cloud servers for easy testin
 
 # Installation and Usage
 
-// TODO: Installation
-
+```
+pip install molecule-glesys
+```
 
 Create a new role with molecule using this driver:
 

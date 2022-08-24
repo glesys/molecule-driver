@@ -7,7 +7,7 @@
   no_log: "{{ molecule_no_log }}"
   tasks:
     - name: Destroy server instances
-      glesys.cloud.glesys_server:
+      glesys.cloud.server:
         hostname: "{{ item.name }}"
         state: absent
         project: "{{ lookup('ansible.builtin.env', 'GLESYS_PROJECT') }}"

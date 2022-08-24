@@ -16,7 +16,7 @@
       register: keypair_result
 
     - name: Create or update server at glesys, returns list of servers in project
-      glesys.cloud.glesys_server:
+      glesys.cloud.server:
         hostname: "{{ item.name }}"
         state: present
         project: "{{ lookup('ansible.builtin.env', 'GLESYS_PROJECT') }}"
