@@ -39,7 +39,7 @@
       loop: "{{ molecule_yml.platforms }}"
 
     - name: Check the test instance creation status
-      async_status:
+      ansible.builtin.async_status:
         jid: "{{ item.ansible_job_id }}"
       loop: "{{ async_results.results }}"
       register: server

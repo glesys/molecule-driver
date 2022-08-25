@@ -21,7 +21,7 @@
       loop: "{{ molecule_yml.platforms }}"
 
     - name: Wait for server destruction
-      async_status:
+      ansible.builtin.async_status:
         jid: "{{ item.ansible_job_id }}"
       loop: "{{ async_results.results }}"
       register: server
