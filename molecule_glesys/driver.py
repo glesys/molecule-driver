@@ -9,7 +9,7 @@ LOG = logger.get_logger(__name__)
 class GleSYS(Driver):
     def __init__(self, config=None):
         super(GleSYS, self).__init__(config)
-        self._name = "glesys"
+        self._name = "molecule-glesys"
 
     @property
     def name(self):

@@ -11,7 +11,7 @@ pip install molecule-glesys
 Create a new role with molecule using this driver:
 
 ```
-molecule init role <role_name> -d glesys
+molecule init role <role_name> -d molecule-glesys
 ```
 
 Configure `<role_name>/molecule/default/molecule.yml` with required parameters.  
@@ -23,7 +23,7 @@ dependency:
   options:
     requirements-file: molecule/default/collections.yml
 driver:
-  name: glesys
+  name: molecule-glesys
   vm_username: molecule
 
 platforms:
