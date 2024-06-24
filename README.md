@@ -51,6 +51,15 @@ verifier:
   name: ansible
 ```
 
+# API Authentication
+
+Use the environment variables `GLESYS_PROJECT` and `GLESYS_APIKEY` to authenticate with the GleSYS API.
+
+```
+export GLESYS_PROJECT=CL12345
+export GLESYS_APIKEY=abc123foo9876
+```
+
 # License
 
 The [MIT](LICENSE) License.
