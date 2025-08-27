@@ -1,6 +1,6 @@
-# Molecule GleSYS Plugin
+# Molecule Glesys Plugin
 
-Molecule driver to spin up and run tests in GleSYS Cloud servers for easy testing
+Molecule driver to spin up and run tests in Glesys Cloud servers for easy testing
 
 # Installation and Usage
 
@@ -53,7 +53,7 @@ verifier:
 
 # API Authentication
 
-Use the environment variables `GLESYS_PROJECT` and `GLESYS_APIKEY` to authenticate with the GleSYS API.
+Use the environment variables `GLESYS_PROJECT` and `GLESYS_APIKEY` to authenticate with the Glesys API.
 
 ```
 export GLESYS_PROJECT=CL12345

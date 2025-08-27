@@ -1,5 +1,5 @@
 ***********************************
-GleSYS driver installation guide
+Glesys driver installation guide
 ***********************************
 
 Install

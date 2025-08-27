@@ -5,7 +5,7 @@ setuptools.setup(
     name="molecule-glesys",
     author='Magnus Johansson',
     author_email='magnus@glesys.se',
-    description='Molecule GleSYS Plugin :: run molecule tests in GleSYS Cloud',
+    description='Molecule Glesys Plugin :: run molecule tests in Glesys Cloud',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     url='https://github.com/glesys/molecule-driver',
@@ -13,7 +13,7 @@ setuptools.setup(
     include_package_data=True,
     entry_points={
         'molecule.driver': [
-            'glesys = molecule_glesys.driver:GleSYS',
+            'glesys = molecule_glesys.driver:Glesys',
         ],
     },
 
