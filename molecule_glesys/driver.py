@@ -6,9 +6,9 @@ from molecule import logger, util
 LOG = logger.get_logger(__name__)
 
 
-class GleSYS(Driver):
+class Glesys(Driver):
     def __init__(self, config=None):
-        super(GleSYS, self).__init__(config)
+        super(Glesys, self).__init__(config)
         self._name = "molecule-glesys"
 
     @property

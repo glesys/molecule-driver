@@ -1,3 +1,4 @@
 dist/
 build/
 molecule_glesys.egg-info/
+.idea
