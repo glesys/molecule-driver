@@ -75,3 +75,12 @@ class Glesys(Driver):
         command in order to figure out where to load the templates from.
         """
         return os.path.join(os.path.dirname(__file__), "cookiecutter")
+
+    def sanity_checks(self):
+        """Confirm that the driver is usable."""
+        if os.environ.get("GLESYS_APIKEY", "") == "":
+            msg = (
+                "Missing env variable GLESYS_APIKEY."
+            )
+            util.sysexit_with_message(msg)
+        pass
